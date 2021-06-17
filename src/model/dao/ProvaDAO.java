@@ -140,7 +140,7 @@ public class ProvaDAO {
         PreparedStatement stmt = null;
         
         try {
-            String query = "DELETE FROM questoes WHERE id = ?";
+            String query = "DELETE FROM questoes WHERE fk_prova = ?";
             stmt = con.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.executeUpdate();

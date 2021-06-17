@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import model.bean.Usuario;
 import controller.ControlLogin;
 import model.dao.UsuarioDAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login()  {
         initComponents();
+         
     }
 
     /**
@@ -70,6 +73,11 @@ public class Login extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
 
@@ -186,20 +194,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ControlLogin CL = new ControlLogin();
-        String email = inputEmail.getText();
-        String senha = new String(inputSenha.getPassword()).trim();
-
-        
-        if(CL.fazerLogin(email, senha)) {            
-            JOptionPane.showMessageDialog(null, "Logado com sucesso!");
-            isAdmin(email, senha);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Houve algum problema ao logar no sistema!");
-            inputSenha.setText("");
-            
-        }   
+        validaLogin();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -207,6 +202,12 @@ public class Login extends javax.swing.JFrame {
         ES.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            validaLogin();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -235,6 +236,7 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -242,6 +244,24 @@ public class Login extends javax.swing.JFrame {
                 new Login().setVisible(true);
             }
         });
+    }
+    
+    
+    public void validaLogin() {
+        ControlLogin CL = new ControlLogin();
+        String email = inputEmail.getText();
+        String senha = new String(inputSenha.getPassword()).trim();
+       
+        if(CL.fazerLogin(email, senha)) {            
+            JOptionPane.showMessageDialog(null, "Logado com sucesso!");
+            isAdmin(email, senha);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Houve algum problema ao logar no sistema!");
+            inputSenha.setText("");
+            
+        }   
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

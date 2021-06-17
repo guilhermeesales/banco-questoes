@@ -52,7 +52,7 @@ public class UsuarioDAO {
         ArrayList<Usuario> users = new ArrayList<>();
         
         try {
-            stmt = con.prepareCall("SELECT * FROM usuario");
+            stmt = con.prepareCall("SELECT * FROM usuario WHERE isadmin <> 1");
            
             rs = stmt.executeQuery();
             

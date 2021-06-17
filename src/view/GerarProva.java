@@ -284,11 +284,8 @@ public class GerarProva extends javax.swing.JFrame {
             ControlProva cProva = new ControlProva();
             Usuario user = Usuario.getInstance();
             int id = (int) tableProvas.getValueAt(tableProvas.getSelectedRow(), 0);
+            JOptionPane.showMessageDialog(null, id);
             cProva.apagarQuestoes(id);
-            DefaultTableModel modelo = (DefaultTableModel) tableProvas.getModel();
-            modelo.setNumRows(0);
-            int id_user = user.getId();
-            readJTableAssuntosForId(id_user);
             
         } else {
             JOptionPane.showMessageDialog(null, "Selecione alguma questão");
